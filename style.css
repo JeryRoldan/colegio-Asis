@@ -127,6 +127,24 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+/* 🔵 Botón de cerrar sesión alineado a la derecha */
+.btn-logout {
+  position: absolute;
+  right: 20px;            /* separa del borde derecho */
+  background: #007bff;    /* azul */
+  color: white;           /* texto blanco */
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: #0056b3;    /* azul más oscuro al pasar el mouse */
+}
+
 
 /* 🔵 BOTÓN DE INGRESAR */
 .login-card button {
@@ -149,21 +167,7 @@ body {
   display: none;
 }
 
-/* 🔵 Botón de cerrar sesión (mismo estilo que Ingresar) */
-.btn-logout {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
 
-.btn-logout:hover {
-  background: #0056b3;
-}
 
 
 /* 🧩 CONTENEDORES GENERALES */
