@@ -1,93 +1,25 @@
 body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f9;
-      margin: 0;
-      padding: 0;
-  
-      justify-content: center;
-    }
-    .menu {
-      background: #007bff;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      height: 30px; /* altura fija */
-    }
-    .menu button {
-      margin: 0 8px;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      background: white;
-      color: #007bff;
-      font-weight: bold;
-    }
-    .menu button:hover { background: #e0e0e0; }
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
 
-    /* 🟦 MENÚ SUPERIOR AJUSTADO */
+/* 🔵 MENÚ PRINCIPAL */
 .menu {
   display: flex;
   align-items: center;
   justify-content: center;
   background: #007bff;
   padding: 10px 20px;
-  border-radius: 8px;
+  border-radius: 0;
   position: relative;
   min-height: 80px;
-  overflow: visible;
+  flex-wrap: wrap; /* Permite que se acomoden los elementos */
 }
 
-.menu-botones {
-  display: flex;
-  gap: 10px;
-}
-
-.menu-botones button {
-  background: white;
-  color: #007bff;
-  border: none;
-  border-radius: 5px;
-  padding: 6px 12px;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.menu-botones button:hover {
-  background: #e7f0ff;
-}
-
-/* 🔍 Buscador fijo a la derecha dentro del menú */
-.buscador-menu {
-  position: absolute;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.buscador-menu input {
-  padding: 5px 8px;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  width: 180px;
-}
-
-.buscador-menu button {
-  background: white;
-  color: #007bff;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.buscador-menu button:hover {
-  background: #e0e7ff;
-}
-/* LOGO DEL MENÚ  */
+/* LOGO DEL MENÚ */
 .menu-logo {
   position: absolute;
   left: 15px;
@@ -99,72 +31,42 @@ body {
 }
 
 .menu-logo img {
-  max-height: 70px;
+  max-height: 60px;
   width: auto;
   object-fit: contain;
   border-radius: 8px;
   padding: 3px;
-  display: block;
   background: transparent;
 }
 
-
-
-/* 🔒 LOGO EN EL LOGIN */
-.login-logo {
-  display: block;
-  margin: 0 auto 20px auto;
-  max-width: 200px;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 10px;
-  background: transparent;
-  padding: 5px;
+/* BOTONES DEL MENÚ */
+.menu-botones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.login-logo:hover {
-  transform: scale(1.05);     /* pequeño efecto suave al pasar el mouse */
+.menu-botones button {
+  background: white;
+  color: #007bff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: 500;
 }
-    
-    .card.active { display: block; }
-    h2 { text-align: center; margin-bottom: 15px; }
-    label { display:block; margin-top:10px; font-weight: bold; }
-    input, textarea, select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
-    }
-    textarea { resize: vertical; }
 
-    /* pasos ficha psico */
-    .step { display: none; }
-    .step.active { display: block; }
-    .nav-buttons { text-align: center; margin-top: 20px; }
+.menu-botones button:hover {
+  background: #e7f0ff;
+}
 
-    /* ===== Botones Azul con letra blanca ===== */
-    .btn {
-      padding: 10px 18px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      background: #007bff; /* azul */
-      color: white;        /* letra blanca */
-      font-weight: bold;
-    }
-    .btn:hover { background: #0056b3; }
 
-    /* opcional: uniformar botones de navegación */
-    .nav-buttons .btn {
-      margin: 5px;
-      min-width: 120px;
-    }
-    .container {
+/* TARJETAS */
+.container {
   display: block;
   margin: 0 auto;
-  padding: 30px 50px;
+  padding: 30px 20px;
   background: #f4f6f9;
 }
 
@@ -172,15 +74,16 @@ body {
   width: 100%;
   max-width: 900px;
   background: #fff;
-  padding: 25px 30px;
-  margin: 30px auto;
+  padding: 25px 20px;
+  margin: 20px auto;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-/* 🔐 Centrar login */
+
+/* LOGIN */
 .login-card {
   width: 300px;
-  margin: 150px auto;
+  margin: 120px auto;
   text-align: center;
   background: white;
   padding: 25px 20px;
@@ -188,111 +91,122 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.login-card input {
+.login-logo {
   display: block;
+  margin: 0 auto 20px auto;
+  max-width: 200px;
+  height: auto;
+  border-radius: 10px;
+  background: transparent;
+  padding: 5px;
+}
+
+.login-logo:hover {
+  transform: scale(1.05);
+}
+
+/* FORMULARIOS */
+input, textarea, select {
   width: 100%;
-  margin: 8px 0;
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
+textarea { resize: vertical; }
 
-.login-card button {
+/* BOTONES */
+.btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
   background: #007bff;
   color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
+  font-weight: bold;
+}
+.btn:hover { background: #0056b3; }
+
+/* 🔷 Centrado de botones de navegación */
+.nav-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+.nav-buttons .btn {
+  margin: 5px;
+  min-width: 120px;
 }
 
-.login-card button:hover {
-  background: #0056b3;
-}
-
-/* 🔷 Oculta el panel hasta que se loguea */
-#panel {
-  display: none;
-}
-
-/* Estilo general del formulario */
-  #form-psico {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    color: #000;
+/* ✅ ADAPTACIÓN A MÓVILES */
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    min-height: auto;
   }
 
-  /* Tablas */
-  #form-psico table {
-    border-collapse: collapse;
-    width: 100%;
+  .menu-logo {
+    position: relative;
+    transform: none;
+    top: 0;
+    left: 0;
     margin-bottom: 10px;
   }
 
-  #form-psico th, 
-  #form-psico td {
-    border: 1px solid #666;
-    padding: 6px;
-    vertical-align: middle;
+  .menu-botones {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
-  /* Encabezados */
-  #form-psico th {
-    font-weight: bold;
-    text-align: center;
+  .buscador-menu {
+    position: relative;
+    right: 0;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
   }
 
-  /* Inputs y textareas dentro de las tablas */
-  #form-psico input[type="text"],
-  #form-psico input[type="date"],
-  #form-psico input[type="email"],
-  #form-psico textarea {
-    width: 95%;
-    border: 1px solid #999;
-    border-radius: 3px;
-    padding: 3px;
+  .buscador-menu input {
+    width: 70%;
+  }
+
+  .login-card {
+    width: 90%;
+    margin: 100px auto;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 4px;
+  }
+}
+
+/* Extra pequeño (teléfonos en vertical) */
+@media (max-width: 480px) {
+  .buscador-menu input {
+    width: 65%;
+  }
+
+  .menu-botones button {
+    padding: 6px 10px;
     font-size: 13px;
-    box-sizing: border-box;
   }
 
-  /* Casillas de verificación */
-  #form-psico input[type="checkbox"] {
-    transform: scale(1.1);
-    margin-right: 3px;
-  }
-
-  /* Separación entre pasos */
-  .step {
-    margin-bottom: 30px;
-  }
-
-  /* Botones de navegación */
-  .nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+  .menu-logo img {
+    max-height: 50px;
   }
 
   .btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
+    padding: 8px 12px;
   }
-
-  .btn:hover {
-    background-color: #0056b3;
-  }
-
-  /* Versión para impresión */
-  @media print {
-    .btn, .nav-buttons {
-      display: none;
-    }
-    #form-psico {
-      font-size: 12px;
-    }
-  }
+}
