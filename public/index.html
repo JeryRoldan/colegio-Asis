@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Formularios Psicopedagógicos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+  
+      justify-content: center;
+    }
+    .menu {
+      background: #007bff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      height: 30px; /* altura fija */
+    }
+    .menu button {
+      margin: 0 8px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: white;
+      color: #007bff;
+      font-weight: bold;
+    }
+    .menu button:hover { background: #e0e0e0; }
+
+    /* 🟦 MENÚ SUPERIOR AJUSTADO */
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #007bff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  position: relative;
+  min-height: 80px;
+  overflow: visible;
+}
+
+.menu-botones {
+  display: flex;
+  gap: 10px;
+}
+
+.menu-botones button {
+  background: white;
+  color: #007bff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.menu-botones button:hover {
+  background: #e7f0ff;
+}
+
+/* 🔍 Buscador fijo a la derecha dentro del menú */
+.buscador-menu {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.buscador-menu input {
+  padding: 5px 8px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  width: 180px;
+}
+
+.buscador-menu button {
+  background: white;
+  color: #007bff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.buscador-menu button:hover {
+  background: #e0e7ff;
+}
+/* LOGO DEL MENÚ  */
+.menu-logo {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+
+.menu-logo img {
+  max-height: 70px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  padding: 3px;
+  display: block;
+  background: transparent;
+}
+
+
+
+/* 🔒 LOGO EN EL LOGIN */
+.login-logo {
+  display: block;
+  margin: 0 auto 20px auto;
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  background: transparent;
+  padding: 5px;
+}
+
+.login-logo:hover {
+  transform: scale(1.05);     /* pequeño efecto suave al pasar el mouse */
+}
+    
+    .card.active { display: block; }
+    h2 { text-align: center; margin-bottom: 15px; }
+    label { display:block; margin-top:10px; font-weight: bold; }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    textarea { resize: vertical; }
+
+    /* pasos ficha psico */
+    .step { display: none; }
+    .step.active { display: block; }
+    .nav-buttons { text-align: center; margin-top: 20px; }
+
+    /* ===== Botones Azul con letra blanca ===== */
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #007bff; /* azul */
+      color: white;        /* letra blanca */
+      font-weight: bold;
+    }
+    .btn:hover { background: #0056b3; }
+
+    /* opcional: uniformar botones de navegación */
+    .nav-buttons .btn {
+      margin: 5px;
+      min-width: 120px;
+    }
+    .container {
+  display: block;
+  margin: 0 auto;
+  padding: 30px 50px;
+  background: #f4f6f9;
+}
+
+.card {
+  width: 100%;
+  max-width: 900px;
+  background: #fff;
+  padding: 25px 30px;
+  margin: 30px auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+/* 🔐 Centrar login */
+.login-card {
+  width: 300px;
+  margin: 150px auto;
+  text-align: center;
+  background: white;
+  padding: 25px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.login-card input {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-card button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-card button:hover {
+  background: #0056b3;
+}
+
+/* 🔷 Oculta el panel hasta que se loguea */
+#panel {
+  display: none;
+}
+
+/* Estilo general del formulario */
+  #form-psico {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+  }
+
+  /* Tablas */
+  #form-psico table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  #form-psico th, 
+  #form-psico td {
+    border: 1px solid #666;
+    padding: 6px;
+    vertical-align: middle;
+  }
+
+  /* Encabezados */
+  #form-psico th {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  /* Inputs y textareas dentro de las tablas */
+  #form-psico input[type="text"],
+  #form-psico input[type="date"],
+  #form-psico input[type="email"],
+  #form-psico textarea {
+    width: 95%;
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 3px;
+    font-size: 13px;
+    box-sizing: border-box;
+  }
+
+  /* Casillas de verificación */
+  #form-psico input[type="checkbox"] {
+    transform: scale(1.1);
+    margin-right: 3px;
+  }
+
+  /* Separación entre pasos */
+  .step {
+    margin-bottom: 30px;
+  }
+
+  /* Botones de navegación */
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .btn:hover {
+    background-color: #0056b3;
+  }
+
+  /* Versión para impresión */
+  @media print {
+    .btn, .nav-buttons {
+      display: none;
+    }
+    #form-psico {
+      font-size: 12px;
+    }
+  }
+
+</style>
+
+</head>
+<body>
+  <!-- 🔒 LOGIN -->
+  <div id="login" class="login-container">
+    <div class="login-card">
+      <img src="img/logo.png" class="login-logo">
+      <h2>Iniciar Sesión</h2>
+      <input type="text" id="usuario" placeholder="Usuario" required>
+      <input type="password" id="clave" placeholder="Contraseña" required>
+      <button onclick="iniciarSesion()">Ingresar</button>
+    </div>
+  </div>
+
+  <!-- 🔓 CONTENIDO -->
+  <div id="contenido" style="display: none;">
+
+    <!-- MENÚ SUPERIOR -->
+    <div class="menu">
+      <div class="menu-logo">
+        <img src="img/logo.png">
+      </div>
+      <div class="menu-botones">
+        <button onclick="showForm('psico')">Ficha Psicopedagógica</button>
+        <button onclick="showForm('derivacion')">Ficha de Derivación 2025</button>
+      </div>
+      <div class="buscador-menu">
+        <input type="text" id="searchInput" placeholder="Buscar alumno...">
+        <button onclick="buscarAlumno()">🔍</button>
+
+        <!-- Botón de cerrar sesión -->
+        <button id="btnLogout">Cerrar sesión</button>
+      </div>
+
+      
+    </div>
+
+    <!-- PANEL PRINCIPAL -->
+    <div id="panel">
+      <div id="resultado-busqueda" class="card" style="display:none;">
+        <h2>Resultado de la Búsqueda</h2>
+        <table border="1" id="tabla-busqueda" style="width:100%; border-collapse: collapse;">
+          <thead id="thead-busqueda"></thead>
+          <tbody id="tbody-busqueda"></tbody>
+        </table>
+      </div>
+
+
+    </div>
+
+      <!-- ========================= -->
+      <!-- FICHA PSICOPEDAGÓGICA -->
+      <!-- ========================= -->
+     <div id="form-psico" class="card" style="display:none;">
+        <h2>Ficha Psicopedagógica</h2>
+        <form id="form-psico-data" onsubmit="submitForm(event,'FICHA_PSICOPEDAGOGICA')">
+
+    <!-- ========================= -->
+<!-- PASO 1: I. DATOS PERSONALES -->
+<!-- ========================= -->
+<div class="step active">
+  <table border="1" style="border-collapse:collapse; width:100%; font-family:Arial, sans-serif; font-size:14px;">
+    <tr style="background:#e6e6e6;">
+      <th colspan="6" style="text-align:left; padding:5px; font-weight:bold;">I. DATOS PERSONALES</th>
+    </tr>
+    <tr>
+      <td colspan="4" style="padding:4px;">Nombre del Estudiante:<br><input type="text" name="nombre_estudiante" style="width:98%;"></td>
+      <td style="padding:4px;">Edad:<br><input type="text" name="edad" style="width:90%;"></td>
+      <td style="padding:4px;">Sexo:<br>
+        <label><input type="checkbox" name="sexo_F" value="F"> F</label>
+        <label><input type="checkbox" name="sexo_M" value="M"> M</label>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:4px;">Fecha de Nacimiento:<br><input type="date" name="fecha_nacimiento" style="width:95%;"></td>
+      <td colspan="2" style="padding:4px;">Lugar de nacimiento:<br><input type="text" name="lugar_nacimiento" style="width:95%;"></td>
+      <td style="padding:4px;">Grado que cursa:<br><input type="text" name="grado_cursa" style="width:95%;"></td>
+      <td style="padding:4px;">Grado que postula:<br><input type="text" name="grado_postula" style="width:95%;"></td>
+      <td style="padding:4px;">Teléfono:<br><input type="text" name="telefono" style="width:95%;"></td>
+    </tr>
+    <tr>
+      <td style="padding:4px;">Año de ingreso al colegio:<br><input type="text" name="anio_ingreso" style="width:95%;"></td>
+      <td colspan="2" style="padding:4px;">Tutor(a):<br><input type="text" name="tutor" style="width:95%;"></td>
+      <td colspan="2" style="padding:4px;">D.N.I.:<br><input type="text" name="dni" style="width:95%;"></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">Dirección:<br><input type="text" name="direccion" style="width:99%;"></td>
+    </tr>
+  </table>
+</div>
+
+<!-- ========================= -->
+<!-- PASO 2: II. ÁMBITO FAMILIAR -->
+<!-- ========================= -->
+<div class="step">
+  <table border="1" style="border-collapse:collapse; width:100%; font-family:Arial, sans-serif; font-size:14px;">
+    <tr style="background:#e6e6e6;">
+      <th colspan="6" style="text-align:left; padding:5px; font-weight:bold;">II. ÁMBITO FAMILIAR</th>
+    </tr>
+    <!-- PADRE -->
+    <tr>
+      <td colspan="2" style="padding:4px;">Nombre del padre:<br><input type="text" name="nombre_padre" style="width:95%;"></td>
+      <td colspan="2" style="padding:4px;">Email:<br><input type="email" name="email_padre" style="width:95%;"></td>
+      <td colspan="2" style="padding:4px;">Lugar de Trabajo:<br><input type="text" name="trabajo_padre" style="width:95%;"></td>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding:4px;">Vive con el estudiante:<br>
+        <label><input type="checkbox" name="vive_con_estudiante_padre_si" value="SI"> (SI)</label>
+        <label><input type="checkbox" name="vive_con_estudiante_padre_no" value="NO"> (NO)</label>
+      </td>
+      <td colspan="2" style="padding:4px;">Teléfono:<br><input type="text" name="telefono_padre" style="width:95%;"></td>
+      <td style="padding:4px;">D.N.I.:<br><input type="text" name="dni_padre" style="width:90%;"></td>
+      <td style="padding:4px;">Edad:<br><input type="text" name="edad_padre" style="width:90%;"></td>
+    </tr>
+    <tr>
+      <td colspan="3" style="padding:4px;">Ocupación:<br><input type="text" name="ocupacion_padre" style="width:95%;"></td>
+      <td colspan="3" style="padding:4px;">Grado de estudios:<br><input type="text" name="estudios_padre" style="width:95%;"></td>
+    </tr>
+
+    <!-- MADRE -->
+    <tr>
+      <td colspan="2" style="padding:4px;">Nombre de la madre:<br><input type="text" name="nombre_madre" style="width:95%;"></td>
+      <td colspan="2" style="padding:4px;">Email:<br><input type="email" name="email_madre" style="width:95%;"></td>
+      <td colspan="2" style="padding:4px;">Lugar de Trabajo:<br><input type="text" name="trabajo_madre" style="width:95%;"></td>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding:4px;">Vive con el estudiante:<br>
+        <label><input type="checkbox" name="vive_con_estudiante_madre_si" value="SI"> (SI)</label>
+        <label><input type="checkbox" name="vive_con_estudiante_madre_no" value="NO"> (NO)</label>
+      </td>
+      <td colspan="2" style="padding:4px;">Teléfono:<br><input type="text" name="telefono_madre" style="width:95%;"></td>
+      <td style="padding:4px;">D.N.I.:<br><input type="text" name="dni_madre" style="width:90%;"></td>
+      <td style="padding:4px;">Edad:<br><input type="text" name="edad_madre" style="width:90%;"></td>
+    </tr>
+    <tr>
+      <td colspan="3" style="padding:4px;">Ocupación:<br><input type="text" name="ocupacion_madre" style="width:95%;"></td>
+      <td colspan="3" style="padding:4px;">Grado de estudios:<br><input type="text" name="estudios_madre" style="width:95%;"></td>
+    </tr>
+  </table>
+</div>
+
+
+
+   <!-- ========================= -->
+<!-- PASO 3: III. HISTORIA PERSONAL - SALUD -->
+<!-- ========================= -->
+<div class="step">
+  <table border="1" style="border-collapse:collapse; width:100%; font-family:Arial, sans-serif; font-size:14px;">
+    <tr>
+      <th colspan="6" style="text-align:center; padding:5px; font-weight:bold;">
+        III. HISTORIA PERSONAL - SALUD
+      </th>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding:4px;">Número de embarazos:<br><input type="text" name="num_embarazos" style="width:95%;"></td>
+      <td colspan="4" style="padding:4px;">Complicaciones en el embarazo:<br>
+        <label><input type="checkbox" name="complicacion_aborto"> Amenaza de aborto</label>
+        <label><input type="checkbox" name="complicacion_infecciones"> Infecciones</label><br>
+        Otros (especifique): <input type="text" name="complicaciones_otras" style="width:80%;">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="padding:4px;">Parto:<br>
+        <label><input type="checkbox" name="parto_normal"> Normal</label>
+        <label><input type="checkbox" name="parto_cesarea"> Cesárea</label>
+      </td>
+      <td colspan="3" style="padding:4px;">Presentación del recién nacido:<br>
+        <input type="text" name="presentacion_nacimiento" style="width:95%;">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">Dificultades en su desarrollo:<br>
+        <label><input type="checkbox" name="dif_lenguaje"> Lenguaje</label>
+        <label><input type="checkbox" name="dif_caminar"> Al caminar</label>
+        Otros: <input type="text" name="dif_otras" style="width:60%;">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="padding:4px;">Problemas en el sueño:<br>
+        <label><input type="checkbox" name="sueno_si"> Sí</label>
+        <label><input type="checkbox" name="sueno_no"> No</label>
+      </td>
+      <td style="padding:4px;">Peso al nacer:<br><input type="text" name="peso_nacer" style="width:95%;"></td>
+      <td colspan="2" style="padding:4px;">Talla al nacer:<br><input type="text" name="talla_nacer" style="width:95%;"></td>
+    </tr>
+
+    <!-- Tabla Peso/Talla por año -->
+    <tr>
+      <td colspan="6" style="padding:4px;">
+        <table border="1" style="border-collapse:collapse; width:100%; text-align:center; font-size:14px;">
+          <tr>
+            <th>Año Lectivo</th>
+            <th>Peso</th>
+            <th>Talla</th>
+          </tr>
+          <tr>
+            <td>2025</td>
+            <td><input type="text" name="peso_2025" style="width:90%;"></td>
+            <td><input type="text" name="talla_2025" style="width:90%;"></td>
+          </tr>
+          <tr>
+            <td>2026</td>
+            <td><input type="text" name="peso_2026" style="width:90%;"></td>
+            <td><input type="text" name="talla_2026" style="width:90%;"></td>
+          </tr>
+          <tr>
+            <td>2027</td>
+            <td><input type="text" name="peso_2027" style="width:90%;"></td>
+            <td><input type="text" name="talla_2027" style="width:90%;"></td>
+          </tr>
+          <tr>
+            <td>2028</td>
+            <td><input type="text" name="peso_2028" style="width:90%;"></td>
+            <td><input type="text" name="talla_2028" style="width:90%;"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="6" style="padding:4px;">
+        ¿Padece su hijo(a) de alguna enfermedad grave?<br>
+        <label><input type="checkbox" name="enfermedad_grave_si"> Sí</label>
+        <label><input type="checkbox" name="enfermedad_grave_no"> No</label>
+        ¿Cuál? <input type="text" name="enfermedad_detalle" style="width:60%;">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">
+        ¿Está bajo tratamiento médico o psicológico?<br>
+        <label><input type="checkbox" name="tratamiento_si"> Sí</label>
+        <label><input type="checkbox" name="tratamiento_no"> No</label>
+        ¿Cuál? <input type="text" name="tratamiento_detalle" style="width:60%;">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">
+        ¿Cómo considera que es su estado de salud actualmente?<br>
+        <label><input type="checkbox" name="salud_muybueno"> Muy bueno</label>
+        <label><input type="checkbox" name="salud_bueno"> Bueno</label>
+        <label><input type="checkbox" name="salud_regular"> Regular</label>
+        <label><input type="checkbox" name="salud_deficiente"> Deficiente</label>
+        <label><input type="checkbox" name="salud_malo"> Malo</label><br>
+        ¿Por qué? <input type="text" name="salud_motivo" style="width:80%;">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">
+        ¿Presenta alguna discapacidad?<br>
+        <label><input type="checkbox" name="disc_auditiva"> Auditiva</label>
+        <label><input type="checkbox" name="disc_visual"> Visual</label>
+        <label><input type="checkbox" name="disc_lenguaje"> Lenguaje</label>
+        <label><input type="checkbox" name="disc_motora"> Motora</label>
+        <label><input type="checkbox" name="disc_usa_lentes"> Usa lentes</label>
+        <label><input type="checkbox" name="disc_aux_auditivos"> Auxiliares auditivos</label>
+        <label><input type="checkbox" name="disc_baston"> Bastón/Muletas</label><br>
+        Otro: <input type="text" name="disc_otro" style="width:80%;">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="padding:4px;">Presenta alergias:<br><input type="text" name="alergias" style="width:95%;"></td>
+      <td colspan="3" style="padding:4px;">¿Cuenta con seguro médico?<br>
+        <label><input type="checkbox" name="seguro_sis"> SIS</label>
+        <label><input type="checkbox" name="seguro_essalud"> EsSalud</label>
+        Otros: <input type="text" name="seguro_otro" style="width:60%;">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- ========================= -->
+<!-- PASO 4: IV. DATOS SOCIALES - ACADÉMICOS - CONDUCTUALES -->
+<!-- ========================= -->
+<div class="step">
+  <table border="1" style="border-collapse:collapse; width:100%; font-family:Arial, sans-serif; font-size:14px;">
+    <tr>
+      <th colspan="6" style="text-align:center; padding:5px; font-weight:bold;">
+        IV. DATOS SOCIALES - ACADÉMICOS - CONDUCTUALES
+      </th>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">¿Qué tiempo dedica su hijo(a) a las redes sociales o juegos?<br>
+        <input type="text" name="tiempo_redes" style="width:98%;">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">Presenta problemas de interrelación social con el grupo<br>
+        <label><input type="checkbox" name="problemas_sociales_si"> Sí</label>
+        <label><input type="checkbox" name="problemas_sociales_no"> No</label><br>
+        ¿Por qué? <input type="text" name="problemas_sociales_detalle" style="width:80%;">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">Presenta alguna dificultad en lo académico:<br>
+        <label><input type="checkbox" name="dif_bajo_rendimiento"> Bajo rendimiento</label>
+        <label><input type="checkbox" name="dif_repitencia"> Repitencia</label>
+        <label><input type="checkbox" name="dif_cursos_desaprobados"> Cursos desaprobados</label>
+        <label><input type="checkbox" name="dif_otros"> Otros</label><br>
+        Especifique: <input type="text" name="dif_academicas_detalle" style="width:80%;">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">En cuántos colegios estudió su hijo(a). Mencione el nombre y año:<br>
+        <textarea name="colegios_previos" style="width:98%; height:60px;"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">Presenta alguna dificultad en lo conductual:<br>
+        <textarea name="dif_conductuales" style="width:98%; height:60px;"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">Considera que la crianza de su hijo es:<br>
+        <label><input type="checkbox" name="crianza_facil"> Fácil</label>
+        <label><input type="checkbox" name="crianza_normal"> Normal</label>
+        <label><input type="checkbox" name="crianza_dificil"> Difícil</label>
+        <label><input type="checkbox" name="crianza_muydificil"> Muy difícil</label><br>
+        ¿Por qué lo considera así?<br>
+        <textarea name="crianza_detalle" style="width:98%; height:50px;"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">¿Cómo describe a su hijo(a)?<br>
+        <textarea name="descripcion_hijo" style="width:98%; height:60px;"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">¿Quién impone disciplina en casa? ¿Qué tipo de disciplina?<br>
+        <textarea name="disciplina_detalle" style="width:98%; height:50px;"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">En general su hijo obedece<br>
+        <label><input type="checkbox" name="obedece_si"> Sí</label>
+        <label><input type="checkbox" name="obedece_no"> No</label>
+        Hace berrinches:
+        <label><input type="checkbox" name="berrinches_si"> Sí</label>
+        <label><input type="checkbox" name="berrinches_no"> No</label>
+        Se le amonesta:
+        <label><input type="checkbox" name="amonesta_si"> Sí</label>
+        <label><input type="checkbox" name="amonesta_no"> No</label><br>
+        ¿Qué tipo de amonestación aplica? Ejemplo:<br>
+        <textarea name="amonestacion_ejemplo" style="width:98%; height:50px;"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style="padding:4px;">¿Cómo premia las conductas positivas de su hijo?<br>
+        <textarea name="premios_conducta" style="width:98%; height:50px;"></textarea>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+
+    <!-- Navegación entre pasos -->
+    <div class="nav-buttons">
+      <button type="button" class="btn" onclick="prevStep()">Anterior</button>
+      <button type="button" class="btn" onclick="nextStep()">Siguiente</button>
+      <button type="submit" class="btn" id="submitBtn" style="display:none;">Guardar Ficha Psicopedagógica</button>
+    </div>
+
+  </form>
+</div>
+
+    </div>
+  </div>
+
+    
+  <!-- ========================= -->
+  <!-- FICHA DE DERIVACIÓN 2025  -->
+  <!-- ========================= -->
+  <div id="form-derivacion" class="card" >
+    <h2>Ficha de Derivación 2025</h2>
+    <form onsubmit="submitForm(event,'FICHA_DERIVACION_2025')">
+      <label>Apellidos y Nombres</label><input name="apellidos_nombres">
+      <label>Documento de Identidad</label><input name="documento_identidad">
+      <label>Grado</label><input name="grado">
+      <label>Nivel</label><input name="nivel">
+      <label>Edad</label><input name="edad">
+      <label>Fecha de derivación</label><input type="date" name="fecha_derivacion">
+      <label>Tutor(a)</label><input name="tutor">
+      <label>Motivo de derivación</label><textarea name="motivo" rows="3"></textarea>
+      <label>Entrevista con los padres</label><textarea name="entrevista_padres" rows="3"></textarea>
+      <label>Observación sobre el caso</label><textarea name="observacion" rows="4"></textarea>
+
+      <!-- ========================= -->
+      <!-- FICHA DE OBSERVACIÓN INTEGRADA -->
+      <!-- ========================= -->
+      <h2>Ficha de Observación del Estudiante Derivado</h2>
+
+      <label>Fecha de nacimiento</label><input type="date" name="fecha_nacimiento">
+      <label>Fecha actual</label><input type="date" name="fecha_actual">
+
+      <!-- ======================= -->
+      <h3>Indicadores Académicos</h3>
+      <table border="1" cellpadding="6" cellspacing="0" width="100%">
+        <tr><th>Indicador</th><th>Siempre</th><th>A veces</th><th>Pocas veces</th></tr>
+        <tr><td>Sus logros de aprendizaje son los esperados para el grado</td><td><input type="radio" name="logros" value="Siempre"></td><td><input type="radio" name="logros" value="A veces"></td><td><input type="radio" name="logros" value="Pocas veces"></td></tr>
+        <tr><td>Posee capacidad para sostener la atención</td><td><input type="radio" name="atencion" value="Siempre"></td><td><input type="radio" name="atencion" value="A veces"></td><td><input type="radio" name="atencion" value="Pocas veces"></td></tr>
+        <tr><td>Recuerda contenidos con facilidad</td><td><input type="radio" name="recuerda" value="Siempre"></td><td><input type="radio" name="recuerda" value="A veces"></td><td><input type="radio" name="recuerda" value="Pocas veces"></td></tr>
+        <tr><td>Posee capacidad de comprensión</td><td><input type="radio" name="comprension" value="Siempre"></td><td><input type="radio" name="comprension" value="A veces"></td><td><input type="radio" name="comprension" value="Pocas veces"></td></tr>
+        <tr><td>Aprende con rapidez</td><td><input type="radio" name="rapidez" value="Siempre"></td><td><input type="radio" name="rapidez" value="A veces"></td><td><input type="radio" name="rapidez" value="Pocas veces"></td></tr>
+      </table>
+
+      <!-- ======================= -->
+      <h3>Indicadores de Responsabilidad Académica</h3>
+      <table border="1" cellpadding="6" cellspacing="0" width="100%">
+        <tr><th>Indicador</th><th>Siempre</th><th>A veces</th><th>Pocas veces</th></tr>
+        <tr><td>Asiste puntualmente</td><td><input type="radio" name="puntualidad" value="Siempre"></td><td><input type="radio" name="puntualidad" value="A veces"></td><td><input type="radio" name="puntualidad" value="Pocas veces"></td></tr>
+        <tr><td>Entrega puntualmente sus trabajos</td><td><input type="radio" name="entrega" value="Siempre"></td><td><input type="radio" name="entrega" value="A veces"></td><td><input type="radio" name="entrega" value="Pocas veces"></td></tr>
+        <tr><td>Responsable en tareas</td><td><input type="radio" name="responsable" value="Siempre"></td><td><input type="radio" name="responsable" value="A veces"></td><td><input type="radio" name="responsable" value="Pocas veces"></td></tr>
+        <tr><td>Motivado para el trabajo académico</td><td><input type="radio" name="motivado" value="Siempre"></td><td><input type="radio" name="motivado" value="A veces"></td><td><input type="radio" name="motivado" value="Pocas veces"></td></tr>
+      </table>
+
+      <!-- ======================= -->
+      <h3>Indicadores de Conducta</h3>
+      <table border="1" cellpadding="6" cellspacing="0" width="100%">
+        <tr><th>Indicador</th><th>Siempre</th><th>A veces</th><th>Pocas veces</th></tr>
+        <tr><td>Lleva la clase en silencio</td><td><input type="radio" name="silencio" value="Siempre"></td><td><input type="radio" name="silencio" value="A veces"></td><td><input type="radio" name="silencio" value="Pocas veces"></td></tr>
+        <tr><td>No interrumpe las clases</td><td><input type="radio" name="interrumpe" value="Siempre"></td><td><input type="radio" name="interrumpe" value="A veces"></td><td><input type="radio" name="interrumpe" value="Pocas veces"></td></tr>
+        <tr><td>Respeta a sus compañeros</td><td><input type="radio" name="respeto_comp" value="Siempre"></td><td><input type="radio" name="respeto_comp" value="A veces"></td><td><input type="radio" name="respeto_comp" value="Pocas veces"></td></tr>
+        <tr><td>Respeta al docente</td><td><input type="radio" name="respeto_doc" value="Siempre"></td><td><input type="radio" name="respeto_doc" value="A veces"></td><td><input type="radio" name="respeto_doc" value="Pocas veces"></td></tr>
+      </table>
+
+      <!-- ======================= -->
+      <h3>Indicadores Emocionales</h3>
+      <table border="1" cellpadding="6" cellspacing="0" width="100%">
+        <tr><th>Indicador</th><th>Siempre</th><th>A veces</th><th>Pocas veces</th></tr>
+        <tr><td>Regula sus emociones</td><td><input type="radio" name="emociones" value="Siempre"></td><td><input type="radio" name="emociones" value="A veces"></td><td><input type="radio" name="emociones" value="Pocas veces"></td></tr>
+        <tr><td>Muestra tolerancia a la frustración</td><td><input type="radio" name="tolerancia" value="Siempre"></td><td><input type="radio" name="tolerancia" value="A veces"></td><td><input type="radio" name="tolerancia" value="Pocas veces"></td></tr>
+        <tr><td>Sociable y adaptable</td><td><input type="radio" name="sociable" value="Siempre"></td><td><input type="radio" name="sociable" value="A veces"></td><td><input type="radio" name="sociable" value="Pocas veces"></td></tr>
+      </table>
+
+      <!-- ======================= -->
+      <h3>Áreas de Observación</h3>
+      <table border="1" cellpadding="6" cellspacing="0" width="100%">
+        <tr><th>Área</th><th>Logrado</th><th>En proceso</th><th>Necesita mejorar</th></tr>
+        <tr><td>Académica</td><td><input type="radio" name="area_academica" value="Logrado"></td><td><input type="radio" name="area_academica" value="En proceso"></td><td><input type="radio" name="area_academica" value="Necesita mejorar"></td></tr>
+        <tr><td>Conductual</td><td><input type="radio" name="area_conductual" value="Logrado"></td><td><input type="radio" name="area_conductual" value="En proceso"></td><td><input type="radio" name="area_conductual" value="Necesita mejorar"></td></tr>
+        <tr><td>Socio-emocional</td><td><input type="radio" name="area_socioemocional" value="Logrado"></td><td><input type="radio" name="area_socioemocional" value="En proceso"></td><td><input type="radio" name="area_socioemocional" value="Necesita mejorar"></td></tr>
+      </table>
+
+      <!-- ========================= -->
+      <!-- SOLO UN BOTÓN -->
+      <!-- ========================= -->
+      <button class="btn" type="submit">Guardar Ficha de Derivación</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+  <script>
+     
+    // ----- LOGIN -----
+function iniciarSesion() {
+  const usuario = document.getElementById('usuario').value;
+  const clave = document.getElementById('clave').value;
+
+  // Ejemplo simple de validación
+  if(usuario === 'admin' && clave === 'admin') {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('contenido').style.display = 'block';
+  } else {
+    alert('Usuario o contraseña incorrectos');
+  }
+}
+
+// ===== Logout =====
+document.getElementById('btnLogout').addEventListener('click', () => {
+  // Limpiar buscador
+  document.getElementById('searchInput').value = '';
+
+  // Limpiar tabla de resultados
+  const tabla = document.getElementById('tabla-busqueda');
+  if(tabla) tabla.innerHTML = '';
+
+  // Ocultar contenido y mostrar login
+  document.getElementById('contenido').style.display = 'none';
+  document.getElementById('login').style.display = 'block';
+});
+
+
+
+// ----- MOSTRAR FORMULARIOS -----
+function showForm(formId) {
+  document.getElementById("form-psico").style.display = "none";
+  document.getElementById("form-derivacion").style.display = "none";
+  document.getElementById("form-" + formId).style.display = "block";
+}
+
+// ----- BÚSQUEDA DE ALUMNOS -----
+async function buscarAlumno() {
+  const search = document.getElementById("searchInput").value;
+  if (!search) return alert('Ingrese un nombre o DNI');
+
+  const res = await fetch(`/buscar?q=${encodeURIComponent(search)}`);
+  const js = await res.json();
+
+  if (!js.ok) return alert(js.msg);
+  if (!js.data.length) return alert('No se encontró ningún alumno');
+
+  const alumno = js.data[0]; // Primer resultado
+  for (const key in alumno) {
+    const input = document.querySelector(`[name="${key}"]`);
+    if (input) input.value = alumno[key];
+  }
+
+  alert('Formulario llenado automáticamente. Ahora puedes editar y guardar.');
+}
+
+// ----- ENVIAR FORMULARIO -----
+async function submitForm(evt, formType) {
+  evt.preventDefault();
+  const form = evt.target;
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  const res = await fetch('/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ formType, data })
+  });
+  const js = await res.json();
+  if (res.ok && js.ok) {
+    alert('Guardado ✅');
+    form.reset();
+  } else {
+    alert('Error: ' + js.msg);
+  }
+}
+
+// ----- PASOS FICHA PSICOPEDAGÓGICA -----
+let currentStep = 0;
+function showStep(n) {
+  const steps = document.querySelectorAll('#form-psico-data .step');
+  const btnPrev = document.querySelector('#form-psico-data .nav-buttons button:nth-child(1)');
+  const btnNext = document.querySelector('#form-psico-data .nav-buttons button:nth-child(2)');
+  const btnSubmit = document.getElementById('submitBtn');
+  steps.forEach((s, i) => s.classList.toggle('active', i === n));
+  btnPrev.style.display = n === 0 ? 'none' : 'inline-block';
+  btnNext.style.display = n === steps.length - 1 ? 'none' : 'inline-block';
+  btnSubmit.style.display = n === steps.length - 1 ? 'inline-block' : 'none';
+}
+function nextStep() { currentStep++; showStep(currentStep); }
+function prevStep() { currentStep--; showStep(currentStep); }
+showStep(currentStep);
+
+// Mostrar solo ficha psicopedagógica al inicio
+document.getElementById('form-derivacion').style.display = 'none';
+document.getElementById('form-psico').style.display = 'block';
+
+// ===== Buscar =====
+  document.getElementById('btnBuscar').addEventListener('click', async () => {
+    const q = prompt("Ingrese nombre o DNI a buscar:");
+    if (!q) return;
+
+    const res = await fetch(`/buscar?q=${encodeURIComponent(q)}`);
+    const data = await res.json();
+
+    const tbody = document.querySelector('#tablaResultados tbody');
+    tbody.innerHTML = ''; // limpiar tabla
+
+    if (data.ok && data.data.length > 0) {
+      data.data.forEach(alumno => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${alumno.dni}</td>
+          <td>${alumno.nombre_estudiante}</td>
+          <td>${alumno.grado_cursa}</td>
+          <td>
+            <button onclick="alert('Editar ${alumno.dni}')">Editar</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } else {
+      tbody.innerHTML = `<tr><td colspan="4">No se encontraron resultados</td></tr>`;
+    }
+  });
+
+  
+
+  </script>
+</body>
+</html>
+
+
+
+
+
