@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Formularios Psicopedagógicos</title>
+  <title>Colegio Asis</title>
   <link rel="icon" type="image/png" href="img/logo.png">
   <link rel="stylesheet" href="style.css">
 
@@ -32,9 +32,7 @@
         <button onclick="showForm('derivacion')">Ficha de Derivación 2025</button>
       </div>
       <div class="buscador-menu">
-        <input type="text" id="searchInput" placeholder="Buscar alumno...">
-        <button onclick="buscarAlumno()">🔍</button>
-
+        
         <!-- Botón de cerrar sesión -->
         <button id="btnLogout">Cerrar sesión</button>
       </div>
@@ -569,38 +567,8 @@ showStep(currentStep);
 document.getElementById('form-derivacion').style.display = 'none';
 document.getElementById('form-psico').style.display = 'block';
 
-// ===== Buscar =====
-  document.getElementById('btnBuscar').addEventListener('click', async () => {
-    const q = prompt("Ingrese nombre o DNI a buscar:");
-    if (!q) return;
+ 
 
-    const res = await fetch(`/buscar?q=${encodeURIComponent(q)}`);
-    const data = await res.json();
-
-    const tbody = document.querySelector('#tablaResultados tbody');
-    tbody.innerHTML = ''; // limpiar tabla
-
-    if (data.ok && data.data.length > 0) {
-      data.data.forEach(alumno => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${alumno.dni}</td>
-          <td>${alumno.nombre_estudiante}</td>
-          <td>${alumno.grado_cursa}</td>
-          <td>
-            <button onclick="alert('Editar ${alumno.dni}')">Editar</button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    } else {
-      tbody.innerHTML = `<tr><td colspan="4">No se encontraron resultados</td></tr>`;
-    }
-  });
-
-  
-
-  
 
   </script>
 </body>

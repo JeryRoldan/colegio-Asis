@@ -73,65 +73,6 @@ app.post('/submit', async (req, res) => {
   }
 });
 
-function authMiddleware(req, res, next) {
-  if (!req.session.user) {
-    return res.status(401).json({ ok: false, msg: 'No autorizado' });
-  }
-  next();
-}
-
-// Ruta protegida de búsqueda de alumnos
-app.get('/buscar', authMiddleware, async (req, res) => {
-  try {
-    const { q } = req.query;
-    if (!q) return res.json({ ok: true, data: [] });
-
-    const pool = await sql.connect(dbConfig);
-    const request = pool.request();
-    request.input('busqueda', sql.VarChar, `%${q}%`);
-
-    const query = `
-      SELECT TOP 10 * 
-      FROM dbo.alumnos
-      WHERE nombre_estudiante LIKE @busqueda
-         OR CAST(dni AS VARCHAR) LIKE @busqueda
-         OR grado_cursa LIKE @busqueda
-    `;
-
-    const result = await request.query(query);
-    res.json({ ok: true, data: result.recordset });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ ok: false, msg: 'Error al buscar', error: err.message });
-  }
-});
-
-
-
-document.getElementById('btnBuscar').addEventListener('click', async () => {
-  const q = document.getElementById('busqueda').value.trim();
-  if (!q) return alert('Ingresa un nombre o DNI');
-
-  const res = await fetch(`/buscar?q=${encodeURIComponent(q)}`);
-  const data = await res.json();
-
-  const tbody = document.querySelector('#tablaResultados tbody');
-  tbody.innerHTML = ''; // limpiar tabla
-
-  if (data.ok && data.data.length > 0) {
-    data.data.forEach(alumno => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${alumno.dni}</td>
-        <td>${alumno.nombre_estudiante}</td>
-        <td>${alumno.grado_cursa}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-  } else {
-    tbody.innerHTML = `<tr><td colspan="3">No se encontraron resultados</td></tr>`;
-  }
-});
 
 
 
