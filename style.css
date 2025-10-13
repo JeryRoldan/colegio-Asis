@@ -63,35 +63,22 @@ body {
   background: #e7f0ff;
 }
 
-/* 🔍 BUSCADOR EN EL MENÚ */
-.buscador-menu {
+/* 🔵 Botón de cerrar sesión alineado a la derecha */
+.btn-logout {
   position: absolute;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.buscador-menu input {
-  padding: 5px 8px;
-  border-radius: 5px;
+  right: 20px;            /* separa del borde derecho */
+  background: #007bff;    /* azul */
+  color: white;           /* texto blanco */
   border: none;
-  outline: none;
-  width: 180px;
-}
-
-.buscador-menu button {
-  background: white;
-  color: #007bff;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 5px;
+  padding: 8px 14px;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  transition: background 0.3s ease;
 }
 
-.buscador-menu button:hover {
-  background: #e0e7ff;
+.btn-logout:hover {
+  background: #0056b3;    /* azul más oscuro al pasar el mouse */
 }
 
 /* 🔒 LOGIN */
@@ -127,24 +114,6 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-/* 🔵 Botón de cerrar sesión alineado a la derecha */
-.btn-logout {
-  position: absolute;
-  right: 20px;            /* separa del borde derecho */
-  background: #007bff;    /* azul */
-  color: white;           /* texto blanco */
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.btn-logout:hover {
-  background: #0056b3;    /* azul más oscuro al pasar el mouse */
-}
-
 
 /* 🔵 BOTÓN DE INGRESAR */
 .login-card button {
@@ -166,9 +135,6 @@ body {
 #panel {
   display: none;
 }
-
-
-
 
 /* 🧩 CONTENEDORES GENERALES */
 .container {
@@ -286,16 +252,11 @@ body {
     flex-wrap: wrap;
   }
 
-  .buscador-menu {
+  .btn-logout {
     position: relative;
     right: 0;
-    width: 100%;
-    justify-content: center;
+    align-self: center;
     margin-top: 10px;
-  }
-
-  .buscador-menu input {
-    width: 70%;
   }
 
   .login-card {
@@ -320,10 +281,6 @@ body {
 @media (max-width: 480px) {
   .menu-logo img {
     max-height: 50px;
-  }
-
-  .buscador-menu input {
-    width: 65%;
   }
 
   .menu-botones button {
