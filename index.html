@@ -29,38 +29,17 @@
   </div>
 
   <div class="menu-botones">
-    <button onclick="showForm('psico')">Ficha Psicopedagógica</button>
-    <button onclick="showForm('derivacion')">Ficha de Derivación 2025</button>
-  </div>
+        <button onclick="showForm('psico')">Ficha Psicopedagógica</button>
+        <button onclick="showForm('derivacion')">Ficha de Derivación 2025</button>
+      </div>
 
-  <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
-</div>
-
-    
-  
-</div>
-
-
-      
+      <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
     </div>
 
     <!-- PANEL PRINCIPAL -->
-    <div id="panel">
-      <div id="resultado-busqueda" class="card" style="display:none;">
-        <h2>Resultado de la Búsqueda</h2>
-        <table border="1" id="tabla-busqueda" style="width:100%; border-collapse: collapse;">
-          <thead id="thead-busqueda"></thead>
-          <tbody id="tbody-busqueda"></tbody>
-        </table>
-      </div>
-
-
-    </div>
-
-      <!-- ========================= -->
+    <div id="panel-principal">
       <!-- FICHA PSICOPEDAGÓGICA -->
-      <!-- ========================= -->
-     <div id="form-psico" class="card" style="display:none;">
+      <div id="form-psico" class="card" style="display:none;">
         <h2>Ficha Psicopedagógica</h2>
         <form id="form-psico-data" onsubmit="submitForm(event,'FICHA_PSICOPEDAGOGICA')">
 
@@ -380,7 +359,7 @@
   <!-- ========================= -->
   <!-- FICHA DE DERIVACIÓN 2025  -->
   <!-- ========================= -->
-  <div id="form-derivacion" class="card" >
+  <div id="form-derivacion" class="card" style="display: none;">
     <h2>Ficha de Derivación 2025</h2>
     <form onsubmit="submitForm(event,'FICHA_DERIVACION_2025')">
       <label>Apellidos y Nombres</label><input name="apellidos_nombres">
@@ -488,19 +467,12 @@ function iniciarSesion() {
     });
   });
 
-// ===== Logout =====
-document.getElementById('btnLogout').addEventListener('click', () => {
-  // Limpiar buscador si existe
-  const searchInput = document.getElementById('searchInput');
-  if (searchInput) searchInput.value = '';
-
-  // Limpiar tabla de resultados si existe
-  const tabla = document.getElementById('tabla-busqueda');
-  if (tabla) tabla.innerHTML = '';
-
-  // Ocultar el panel de contenido y mostrar el login
-  document.getElementById('contenido').style.display = 'none';
-  document.getElementById('login').style.display = 'block';
+// Logout
+document.getElementById("btnLogout").addEventListener("click", () => {
+  document.getElementById("contenido").style.display = "none";
+  document.getElementById("login").style.display = "block";
+  document.getElementById("usuario").value = "";
+  document.getElementById("password").value = "";
 });
 
 
