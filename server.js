@@ -80,14 +80,8 @@ function authMiddleware(req, res, next) {
   next();
 }
 
-// Ejemplo: proteger la ruta de búsqueda
+// Ruta protegida de búsqueda de alumnos
 app.get('/buscar', authMiddleware, async (req, res) => {
-  // tu código de búsqueda aquí
-});
-
-
-// Buscar alumnos
-app.get('/buscar', async (req, res) => {
   try {
     const { q } = req.query;
     if (!q) return res.json({ ok: true, data: [] });
@@ -111,6 +105,7 @@ app.get('/buscar', async (req, res) => {
     res.status(500).json({ ok: false, msg: 'Error al buscar', error: err.message });
   }
 });
+
 
 
 document.getElementById('btnBuscar').addEventListener('click', async () => {
