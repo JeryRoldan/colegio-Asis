@@ -1,3 +1,4 @@
+/* 🎨 Estilo base */
 body {
   font-family: Arial, sans-serif;
   background: #f4f6f9;
@@ -6,7 +7,7 @@ body {
   justify-content: center;
 }
 
-/* 🔵 MENÚ PRINCIPAL */
+/* 🟦 MENÚ SUPERIOR */
 .menu {
   display: flex;
   align-items: center;
@@ -16,10 +17,12 @@ body {
   border-radius: 0;
   position: relative;
   min-height: 80px;
+  overflow: visible;
   flex-wrap: wrap;
+  color: white;
 }
 
-/* LOGO DEL MENÚ */
+/* 🔹 LOGO DEL MENÚ */
 .menu-logo {
   position: absolute;
   left: 15px;
@@ -27,11 +30,10 @@ body {
   transform: translateY(-50%);
   display: flex;
   align-items: center;
-  overflow: visible;
 }
 
 .menu-logo img {
-  max-height: 60px;
+  max-height: 70px;
   width: auto;
   object-fit: contain;
   border-radius: 8px;
@@ -39,12 +41,12 @@ body {
   background: transparent;
 }
 
-/* BOTONES DEL MENÚ */
+/* 🔹 BOTONES DEL MENÚ */
 .menu-botones {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .menu-botones button {
@@ -54,37 +56,48 @@ body {
   border-radius: 5px;
   padding: 8px 14px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .menu-botones button:hover {
   background: #e7f0ff;
 }
 
-
-
-/* TARJETAS */
-.container {
-  display: block;
-  margin: 0 auto;
-  padding: 30px 20px;
-  background: #f4f6f9;
+/* 🔍 BUSCADOR EN EL MENÚ */
+.buscador-menu {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.card {
-  width: 100%;
-  max-width: 900px;
-  background: #fff;
-  padding: 25px 20px;
-  margin: 20px auto;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.buscador-menu input {
+  padding: 5px 8px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  width: 180px;
 }
 
-/* 🔐 LOGIN */
+.buscador-menu button {
+  background: white;
+  color: #007bff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.buscador-menu button:hover {
+  background: #e0e7ff;
+}
+
+/* 🔒 LOGIN */
 .login-card {
   width: 300px;
-  margin: 120px auto;
+  margin: 150px auto;
   text-align: center;
   background: white;
   padding: 25px 20px;
@@ -115,7 +128,7 @@ body {
   border-radius: 5px;
 }
 
-/* 🔵 BOTÓN DE INGRESAR (restaurado a azul) */
+/* 🔵 BOTÓN DE INGRESAR */
 .login-card button {
   background: #007bff;
   color: white;
@@ -131,40 +144,105 @@ body {
   background: #0056b3;
 }
 
-/* FORMULARIOS GENERALES */
-input, textarea, select {
+/* 🔷 Oculta el panel hasta logueo */
+#panel {
+  display: none;
+}
+
+/* 🧩 CONTENEDORES GENERALES */
+.container {
+  display: block;
+  margin: 0 auto;
+  padding: 30px 50px;
+  background: #f4f6f9;
+}
+
+.card {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  max-width: 900px;
+  background: #fff;
+  padding: 25px 30px;
+  margin: 30px auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 🧾 FORMULARIO PSICOPEDAGÓGICO */
+#form-psico {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+}
+
+/* Tablas */
+#form-psico table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#form-psico th, #form-psico td {
+  border: 1px solid #666;
+  padding: 6px;
+  vertical-align: middle;
+}
+
+#form-psico th {
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Inputs dentro de tablas */
+#form-psico input[type="text"],
+#form-psico input[type="date"],
+#form-psico input[type="email"],
+#form-psico textarea {
+  width: 95%;
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 3px;
+  font-size: 13px;
   box-sizing: border-box;
 }
 
-textarea { resize: vertical; }
-
-/* BOTONES GENERALES */
-.btn {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  background: #007bff;
-  color: white;
-  font-weight: bold;
+/* Checkboxes */
+#form-psico input[type="checkbox"] {
+  transform: scale(1.1);
+  margin-right: 3px;
 }
-.btn:hover { background: #0056b3; }
 
-/* 🔷 Centrado de botones de navegación */
+/* Pasos y navegación */
+.step { display: none; margin-bottom: 30px; }
+.step.active { display: block; }
+
 .nav-buttons {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
   margin-top: 20px;
 }
-.nav-buttons .btn {
-  margin: 5px;
-  min-width: 120px;
+
+.btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
 }
 
-/* ✅ ADAPTACIÓN A MÓVILES */
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* 🖨️ Versión para impresión */
+@media print {
+  .btn, .nav-buttons { display: none; }
+  #form-psico { font-size: 12px; }
+}
+
+/* 📱 ADAPTACIÓN RESPONSIVE */
 @media (max-width: 768px) {
   .menu {
     flex-direction: column;
@@ -217,8 +295,12 @@ textarea { resize: vertical; }
   }
 }
 
-/* Extra pequeño (teléfonos verticales) */
+/* 📲 Extra pequeño (teléfonos verticales) */
 @media (max-width: 480px) {
+  .menu-logo img {
+    max-height: 50px;
+  }
+
   .buscador-menu input {
     width: 65%;
   }
@@ -227,11 +309,7 @@ textarea { resize: vertical; }
     padding: 6px 10px;
     font-size: 13px;
   }
-
-  .menu-logo img {
-    max-height: 50px;
-  }
-
+  
   .btn, .login-card button {
     font-size: 13px;
     padding: 8px 12px;
