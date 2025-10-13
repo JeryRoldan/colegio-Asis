@@ -132,9 +132,10 @@ body {
 }
 
 /* 🔷 Oculta el panel hasta logueo */
-#panel {
-  display: none;
+#contenido {
+  display: none; /* Oculto por defecto */
 }
+
 
 /* 🧩 CONTENEDORES GENERALES */
 .container {
