@@ -294,3 +294,72 @@ body {
     padding: 8px 12px;
   }
 }
+
+.form-derivacion {
+  font-family: "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #000;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.form-derivacion h2, .form-derivacion h3 {
+  font-weight: bold;
+  margin-top: 25px;
+}
+
+.form-derivacion .linea {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.form-derivacion label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.line-input {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+}
+
+.short-input {
+  width: 60px;
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+}
+
+.medium-input {
+  width: 150px;
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+}
+
+.form-derivacion textarea {
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 4px;
+  padding: 6px;
+  resize: none;
+  margin-bottom: 15px;
+}
+
+.form-derivacion button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.form-derivacion button:hover {
+  background-color: #0056b3;
+}

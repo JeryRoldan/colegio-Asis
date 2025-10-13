@@ -361,17 +361,38 @@
   <!-- ========================= -->
   <div id="form-derivacion" class="card" style="display: none;">
     <h2>Ficha de Derivación 2025</h2>
-    <form onsubmit="submitForm(event,'FICHA_DERIVACION_2025')">
-      <label>Apellidos y Nombres</label><input name="apellidos_nombres">
-      <label>Documento de Identidad</label><input name="documento_identidad">
-      <label>Grado</label><input name="grado">
-      <label>Nivel</label><input name="nivel">
-      <label>Edad</label><input name="edad">
-      <label>Fecha de derivación</label><input type="date" name="fecha_derivacion">
-      <label>Tutor(a)</label><input name="tutor">
-      <label>Motivo de derivación</label><textarea name="motivo" rows="3"></textarea>
-      <label>Entrevista con los padres</label><textarea name="entrevista_padres" rows="3"></textarea>
-      <label>Observación sobre el caso</label><textarea name="observacion" rows="4"></textarea>
+    <div class="linea">
+      <label>APELLIDOS Y NOMBRES:</label>
+      <input name="apellidos_nombres" class="line-input">
+    </div>
+
+    <div class="linea">
+      <label>GRADO:</label>
+      <input name="grado" class="short-input">
+      <label>NIVEL:</label>
+      <input name="nivel" class="medium-input">
+      <label>EDAD:</label>
+      <input name="edad" class="short-input">
+    </div>
+
+    <div class="linea">
+      <label>FECHA DE DERIVACIÓN:</label>
+      <input type="date" name="fecha_derivacion" class="medium-input">
+    </div>
+
+    <div class="linea">
+      <label>TUTOR(A):</label>
+      <input name="tutor" class="line-input">
+    </div>
+
+    <h3>II. MOTIVO DE DERIVACIÓN</h3>
+    <textarea name="motivo" rows="3"></textarea>
+
+    <h3>III. ENTREVISTA CON LOS PADRES</h3>
+    <textarea name="entrevista_padres" rows="3"></textarea>
+
+    <h3>IV. OBSERVACIÓN SOBRE EL CASO</h3>
+    <textarea name="observacion" rows="4"></textarea>
 
       <!-- ========================= -->
       <!-- FICHA DE OBSERVACIÓN INTEGRADA -->
