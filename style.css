@@ -149,6 +149,23 @@ body {
   display: none;
 }
 
+/* 🔵 Botón de cerrar sesión (mismo estilo que Ingresar) */
+.btn-logout {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: #0056b3;
+}
+
+
 /* 🧩 CONTENEDORES GENERALES */
 .container {
   display: block;
@@ -309,7 +326,7 @@ body {
     padding: 6px 10px;
     font-size: 13px;
   }
-  
+
   .btn, .login-card button {
     font-size: 13px;
     padding: 8px 12px;

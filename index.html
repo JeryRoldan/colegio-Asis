@@ -30,10 +30,13 @@
       <div class="menu-botones">
         <button onclick="showForm('psico')">Ficha Psicopedagógica</button>
         <button onclick="showForm('derivacion')">Ficha de Derivación 2025</button>
-        <!-- Botón de cerrar sesión -->
-        <button id="btnLogout">Cerrar sesión</button>
+        
       </div>
-    
+    <div class="buscador-menu">
+  <!-- Botón de cerrar sesión -->
+  <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
+</div>
+
 
       
     </div>
@@ -484,18 +487,18 @@ function iniciarSesion() {
 
 // ===== Logout =====
 document.getElementById('btnLogout').addEventListener('click', () => {
-  // Limpiar buscador
-  document.getElementById('searchInput').value = '';
+  // Limpiar buscador si existe
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) searchInput.value = '';
 
-  // Limpiar tabla de resultados
+  // Limpiar tabla de resultados si existe
   const tabla = document.getElementById('tabla-busqueda');
-  if(tabla) tabla.innerHTML = '';
+  if (tabla) tabla.innerHTML = '';
 
-  // Ocultar contenido y mostrar login
+  // Ocultar el panel de contenido y mostrar el login
   document.getElementById('contenido').style.display = 'none';
   document.getElementById('login').style.display = 'block';
 });
-
 
 
 // ----- MOSTRAR FORMULARIOS -----
@@ -505,25 +508,7 @@ function showForm(formId) {
   document.getElementById("form-" + formId).style.display = "block";
 }
 
-// ----- BÚSQUEDA DE ALUMNOS -----
-async function buscarAlumno() {
-  const search = document.getElementById("searchInput").value;
-  if (!search) return alert('Ingrese un nombre o DNI');
 
-  const res = await fetch(`/buscar?q=${encodeURIComponent(search)}`);
-  const js = await res.json();
-
-  if (!js.ok) return alert(js.msg);
-  if (!js.data.length) return alert('No se encontró ningún alumno');
-
-  const alumno = js.data[0]; // Primer resultado
-  for (const key in alumno) {
-    const input = document.querySelector(`[name="${key}"]`);
-    if (input) input.value = alumno[key];
-  }
-
-  alert('Formulario llenado automáticamente. Ahora puedes editar y guardar.');
-}
 
 // ----- ENVIAR FORMULARIO -----
 async function submitForm(evt, formType) {
@@ -560,6 +545,8 @@ function showStep(n) {
 function nextStep() { currentStep++; showStep(currentStep); }
 function prevStep() { currentStep--; showStep(currentStep); }
 showStep(currentStep);
+
+
 
 // Mostrar solo ficha psicopedagógica al inicio
 document.getElementById('form-derivacion').style.display = 'none';
