@@ -476,6 +476,16 @@ function iniciarSesion() {
   }
 }
 
+// Detectar Enter en inputs de login
+  const loginInputs = [document.getElementById('usuario'), document.getElementById('clave')];
+  loginInputs.forEach(input => {
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        iniciarSesion(); // Llama a tu función existente
+      }
+    });
+  });
+
 // ===== Logout =====
 document.getElementById('btnLogout').addEventListener('click', () => {
   // Limpiar buscador
@@ -587,6 +597,8 @@ document.getElementById('form-psico').style.display = 'block';
       tbody.innerHTML = `<tr><td colspan="4">No se encontraron resultados</td></tr>`;
     }
   });
+
+  
 
   
 
