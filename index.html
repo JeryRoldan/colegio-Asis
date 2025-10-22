@@ -30,7 +30,7 @@
 
   <div class="menu-botones">
         <button onclick="showForm('psico')">Ficha Psicopedagógica</button>
-        <button onclick="showForm('derivacion')">Ficha de Derivación 2025</button>
+        <button onclick="showForm('derivacion')">Ficha de Derivación</button>
       </div>
 
       <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
@@ -43,9 +43,10 @@
         <h2>Ficha Psicopedagógica</h2>
         <form id="form-psico-data" onsubmit="submitForm(event,'FICHA_PSICOPEDAGOGICA')">
 
-    <!-- ========================= -->
-<!-- PASO 1: I. DATOS PERSONALES -->
-<!-- ========================= -->
+    <!-- =========================== -->
+    <!-- PASO 1: I. DATOS PERSONALES -->
+    <!-- =========================== -->
+
 <div class="step active">
   <table border="1" style="border-collapse:collapse; width:100%; font-family:Arial, sans-serif; font-size:14px;">
     <tr style="background:#e6e6e6;">
@@ -345,6 +346,7 @@
     <!-- Navegación entre pasos -->
     <div class="nav-buttons">
       <button type="button" class="btn" onclick="prevStep()">Anterior</button>
+      <button type="button" onclick="descargarExcel('psicopedagogica')">Descargar</button>
       <button type="button" class="btn" onclick="nextStep()">Siguiente</button>
       <button type="submit" class="btn" id="submitBtn" style="display:none;">Guardar Ficha Psicopedagógica</button>
     </div>
@@ -360,7 +362,7 @@
   <!-- FICHA DE DERIVACIÓN 2025  -->
   <!-- ========================= -->
   <div id="form-derivacion" class="card" style="display: none;">
-    <h2>Ficha de Derivación 2025</h2>
+    <h2>Ficha de Derivación</h2>
     <div class="linea">
       <label>APELLIDOS Y NOMBRES:</label>
       <input name="apellidos_nombres" class="line-input">
@@ -454,6 +456,7 @@
       <!-- ========================= -->
       <!-- SOLO UN BOTÓN -->
       <!-- ========================= -->
+       <button type="button" onclick="descargarExcel('derivacion')">Descargar</button>
       <button class="btn" type="submit">Guardar Ficha de Derivación</button>
     </form>
   </div>
@@ -461,8 +464,9 @@
 
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
-  <script>
+  <script >
      
     // ----- LOGIN -----
 function iniciarSesion() {
@@ -543,6 +547,64 @@ function prevStep() { currentStep--; showStep(currentStep); }
 showStep(currentStep);
 
 
+
+function descargarExcel(tipoFicha) {
+  // Seleccionar el formulario correcto según el tipo
+  let formulario = document.querySelector(
+    tipoFicha === "psicopedagogica" ? "#form-psico" : "#form-derivacion"
+  );
+
+  if (!formulario) {
+    alert("No se encontró el formulario correspondiente.");
+    return;
+  }
+
+  // Obtener todos los campos (inputs, selects, textareas)
+  const inputs = formulario.querySelectorAll("input, select, textarea");
+  const datos = [];
+
+  inputs.forEach((campo) => {
+    const etiqueta = campo.name || campo.id || "Campo sin nombre";
+    const valor = campo.value || "";
+    datos.push([etiqueta, valor]);
+  });
+
+  // Buscar algunos datos clave (si existen en el formulario)
+  const nombre = formulario.querySelector("[name='apellidos_nombres']")?.value || "";
+  const grado = formulario.querySelector("[name='grado']")?.value || "";
+  const nivel = formulario.querySelector("[name='nivel']")?.value || "";
+  const fecha = new Date().toLocaleDateString();
+
+  // Crear contenido del Excel
+  const hoja = [
+    [tipoFicha === "psicopedagogica" ? "FICHA PSICOPEDAGÓGICA" : "FICHA DE DERIVACIÓN"],
+    [""],
+    ["Fecha de descarga:", fecha],
+    ["Alumno:", nombre],
+    ["Grado:", grado],
+    ["Nivel:", nivel],
+    [""],
+    ["Campo", "Valor"],
+    ...datos
+  ];
+
+  // Crear la hoja y el libro
+  const ws = XLSX.utils.aoa_to_sheet(hoja);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Datos");
+
+  // Ajustar ancho de columnas
+  ws["!cols"] = [{ wch: 40 }, { wch: 60 }];
+
+  // Nombre del archivo
+  const nombreArchivo =
+    tipoFicha === "psicopedagogica"
+      ? "Ficha_Psicopedagogica.xlsx"
+      : "Ficha_Derivacion_2025.xlsx";
+
+  // Descargar
+  XLSX.writeFile(wb, nombreArchivo);
+}
 
 // Mostrar solo ficha psicopedagógica al inicio
 document.getElementById('form-derivacion').style.display = 'none';
