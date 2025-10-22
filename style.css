@@ -193,16 +193,15 @@ body {
   box-sizing: border-box;
 }
 
-/* 🧾 Títulos principales de las fichas */
+/* ✅ Títulos centrados en color negro */
 #form-psico h2,
 #form-derivacion h2 {
-  text-align: center;           /* Centrar el texto */
-  color: #000;               /* Azul institucional */
+  text-align: center !important;  /* fuerza el centrado */
+  width: 100%;                    /* ocupa todo el ancho */
+  color: #000;                    /* negro */
   font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  display: inline-block;
-  padding-bottom: 5px;
+  margin: 15px 0 25px 0;
+  padding-bottom: 6px;
 }
 
 
@@ -393,4 +392,27 @@ body {
 
 .btn-excel:hover {
   background-color: #0056b3; /* azul más oscuro al pasar el mouse */
+}
+
+/* ✅ Centrar todos los botones de opción (radio) en las tablas */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table th,
+table td {
+  text-align: center;          /* centra el contenido de las celdas */
+  vertical-align: middle;      /* centra verticalmente */
+}
+
+table td:first-child {
+  text-align: left;            /* primera columna (texto de indicador o área) alineada a la izquierda */
+}
+
+input[type="radio"] {
+  display: inline-block;
+  margin: 0 auto;              /* asegura centrado horizontal */
+  transform: scale(1.2);       /* opcional: agranda un poco el radio para mejor visibilidad */
+  cursor: pointer;
 }
