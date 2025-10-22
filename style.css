@@ -363,3 +363,20 @@ body {
 .form-derivacion button:hover {
   background-color: #0056b3;
 }
+
+/* 🎯 Botón de descarga Excel */
+.btn-excel {
+  background-color: #007bff;  /* azul institucional */
+  color: white;               /* texto blanco */
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-excel:hover {
+  background-color: #0056b3; /* azul más oscuro al pasar el mouse */
+}

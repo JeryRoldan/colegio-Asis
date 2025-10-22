@@ -346,7 +346,7 @@
     <!-- Navegación entre pasos -->
     <div class="nav-buttons">
       <button type="button" class="btn" onclick="prevStep()">Anterior</button>
-      <button type="button" onclick="descargarExcel('psicopedagogica')">Descargar</button>
+      <button type="button" class="btn-excel" onclick="descargarExcel('psicopedagogica')">Descargar</button>
       <button type="button" class="btn" onclick="nextStep()">Siguiente</button>
       <button type="submit" class="btn" id="submitBtn" style="display:none;">Guardar Ficha Psicopedagógica</button>
     </div>
@@ -456,7 +456,8 @@
       <!-- ========================= -->
       <!-- SOLO UN BOTÓN -->
       <!-- ========================= -->
-       <button type="button" onclick="descargarExcel('derivacion')">Descargar</button>
+       
+       <button type="button" class="btn-excel" onclick="descargarExcel('derivacion')">Descargar</button>
       <button class="btn" type="submit">Guardar Ficha de Derivación</button>
     </form>
   </div>
