@@ -193,6 +193,20 @@ body {
   box-sizing: border-box;
 }
 
+/* 🧾 Títulos principales de las fichas */
+#form-psico h2,
+#form-derivacion h2 {
+  text-align: center;           /* Centrar el texto */
+  color: #000;               /* Azul institucional */
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+
+
 /* Checkboxes */
 #form-psico input[type="checkbox"] {
   transform: scale(1.1);
