@@ -348,7 +348,7 @@
       <button type="button" class="btn" onclick="prevStep()">Anterior</button>
       <button type="button" class="btn-excel" onclick="exportarExcel('form-psico', 'Ficha_Psicopedagogica')">Descargar</button>
       <button type="button" class="btn" onclick="nextStep()">Siguiente</button>
-      <button type="submit" class="btn" id="submitBtn" style="display:none;">Guardar Ficha Psicopedagógica</button>
+      <button type="submit" class="btn" id="submitBtn" style="display:none;" onclick="guardarFicha('psico')">Guardar Ficha Psicopedagógica</button>
     </div>
 
   </form>
@@ -458,7 +458,7 @@
       <!-- ========================= -->
        
        <button type="button" class="btn-excel" onclick="exportarExcel('form-derivacion', 'Ficha_Derivacion_2025')">Descargar</button>
-      <button class="btn" type="submit">Guardar Ficha de Derivación</button>
+      <button class="btn" type="submit" onclick="guardarFicha('derivacion')">Guardar Ficha de Derivación</button>
     </form>
   </div>
 </div>
@@ -547,24 +547,81 @@ function nextStep() { currentStep++; showStep(currentStep); }
 function prevStep() { currentStep--; showStep(currentStep); }
 showStep(currentStep);
 
-
-
-function exportarExcel(formId, nombreArchivo) {
+function guardarFicha(tipo) {
+  let formId = tipo === 'psico' ? 'form-psico' : 'form-derivacion';
   const form = document.getElementById(formId);
-  if (!form) {
-    alert("Formulario no encontrado");
-    return;
+  const formData = new FormData(form);
+
+  // Verificar que todos los campos requeridos estén llenos
+  for (let [key, value] of formData.entries()) {
+    if (!value.trim()) {
+      alert(`⚠️ El campo "${key}" es obligatorio.`);
+      return;
+    }
   }
 
+  // PHP a donde enviará los datos
+  const phpFile = tipo === 'psico' ? 'php/guardar_psico.php' : 'php/guardar_derivacion.php';
+
+  fetch(phpFile, {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.msg);
+    if (data.ok) form.reset();
+  })
+  .catch(err => alert("❌ Error al guardar: " + err));
+}
+
+function validarFormulario(formId) {
+  const form = document.getElementById(formId);
+  const inputs = form.querySelectorAll("input, select, textarea");
+  let camposFaltantes = [];
+
+  inputs.forEach(input => {
+    // Ignorar campos ocultos
+    if (input.type === "hidden") return;
+
+    // Verificar radios (por grupo)
+    if (input.type === "radio") {
+      const grupo = form.querySelectorAll(`input[name='${input.name}']`);
+      const algunoMarcado = Array.from(grupo).some(r => r.checked);
+      if (!algunoMarcado && !camposFaltantes.includes(input.name)) {
+        camposFaltantes.push(input.name);
+      }
+      return;
+    }
+
+    // Verificar campos normales
+    if (input.required && !input.value.trim()) {
+      camposFaltantes.push(input.name);
+    }
+  });
+
+  if (camposFaltantes.length > 0) {
+    alert("⚠️ Faltan completar los siguientes campos:\n\n" + camposFaltantes.join("\n"));
+    return false;
+  }
+  return true;
+}
+
+// --- Botón para exportar Excel (con validación incluida)
+function exportarExcel(formId, nombreArchivo) {
+  if (!validarFormulario(formId)) {
+    return; // Detiene la exportación si faltan campos
+  }
+
+  const form = document.getElementById(formId);
   const data = [];
   const inputs = form.querySelectorAll("input, select, textarea");
 
   inputs.forEach(input => {
     let valor = "";
-
     if (input.type === "radio") {
       if (input.checked) valor = input.value;
-      else return; // solo tomamos el seleccionado
+      else return;
     } else if (input.type === "checkbox") {
       valor = input.checked ? "Sí" : "No";
     } else {
@@ -577,12 +634,9 @@ function exportarExcel(formId, nombreArchivo) {
     });
   });
 
-  // Crear hoja Excel
   const ws = XLSX.utils.json_to_sheet(data);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Datos");
-
-  // Descargar
   XLSX.writeFile(wb, nombreArchivo + ".xlsx");
 }
 
