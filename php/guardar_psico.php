@@ -1,29 +1,22 @@
 <?php
-header("Content-Type: application/json; charset=UTF-8");
-include "conexion.php";
+include("conexion.php");
 
-$nombre = $_POST['nombre'] ?? '';
-$edad = $_POST['edad'] ?? '';
-$sexo = $_POST['sexo'] ?? '';
-$grado = $_POST['grado'] ?? '';
-$observaciones = $_POST['observaciones'] ?? '';
+// Recuperar datos
+$apellidos_nombres = $_POST['apellidos_nombres'];
+$documento_identidad = $_POST['documento_identidad'];
+$grado = $_POST['grado'];
+$nivel = $_POST['nivel'];
+$edad = $_POST['edad'];
 
-if (empty($nombre) || empty($edad) || empty($sexo)) {
-  echo json_encode(["ok" => false, "msg" => "Faltan campos obligatorios"]);
-  exit;
-}
+// Inserción SQL
+$sql = "INSERT INTO ficha_psicopedagogica (apellidos_nombres, documento_identidad, grado, nivel, edad)
+        VALUES ('$apellidos_nombres', '$documento_identidad', '$grado', '$nivel', '$edad')";
 
-$sql = "INSERT INTO ficha_psicopedagogica (nombre, edad, sexo, grado, observaciones)
-        VALUES (?, ?, ?, ?, ?)";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("sisss", $nombre, $edad, $sexo, $grado, $observaciones);
-
-if ($stmt->execute()) {
-  echo json_encode(["ok" => true, "msg" => "✅ Ficha Psicopedagógica guardada correctamente"]);
+if ($conn->query($sql) === TRUE) {
+    echo "<script>alert('✅ Ficha psicopedagógica guardada correctamente'); window.location.href='index.html';</script>";
 } else {
-  echo json_encode(["ok" => false, "msg" => "❌ Error: " . $conn->error]);
+    echo "<script>alert('❌ Error: " . $conn->error . "'); window.history.back();</script>";
 }
 
-$stmt->close();
 $conn->close();
 ?>

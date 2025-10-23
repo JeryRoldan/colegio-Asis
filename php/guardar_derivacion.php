@@ -1,28 +1,17 @@
 <?php
-header("Content-Type: application/json; charset=UTF-8");
-include "conexion.php";
+include("conexion.php");
 
-$nombre = $_POST['nombre'] ?? '';
-$grado = $_POST['grado'] ?? '';
-$motivo = $_POST['motivo'] ?? '';
-$fecha = $_POST['fecha'] ?? '';
+$apellidos_nombres = $_POST['apellidos_nombres'];
+$motivo = $_POST['motivo'];
 
-if (empty($nombre) || empty($grado) || empty($motivo) || empty($fecha)) {
-  echo json_encode(["ok" => false, "msg" => "Faltan campos obligatorios"]);
-  exit;
-}
+$sql = "INSERT INTO ficha_derivacion (apellidos_nombres, motivo)
+        VALUES ('$apellidos_nombres', '$motivo')";
 
-$sql = "INSERT INTO ficha_derivacion (nombre, grado, motivo, fecha)
-        VALUES (?, ?, ?, ?)";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ssss", $nombre, $grado, $motivo, $fecha);
-
-if ($stmt->execute()) {
-  echo json_encode(["ok" => true, "msg" => "✅ Ficha de Derivación guardada correctamente"]);
+if ($conn->query($sql) === TRUE) {
+    echo "<script>alert('✅ Ficha de derivación guardada correctamente'); window.location.href='index.html';</script>";
 } else {
-  echo json_encode(["ok" => false, "msg" => "❌ Error: " . $conn->error]);
+    echo "<script>alert('❌ Error: " . $conn->error . "'); window.history.back();</script>";
 }
 
-$stmt->close();
 $conn->close();
 ?>
