@@ -552,7 +552,7 @@ function guardarFicha(tipo) {
   const form = document.getElementById(formId);
   const formData = new FormData(form);
 
-  // Verificar que todos los campos requeridos estén llenos
+  // Verificar campos vacíos
   for (let [key, value] of formData.entries()) {
     if (!value.trim()) {
       alert(`⚠️ El campo "${key}" es obligatorio.`);
@@ -560,10 +560,12 @@ function guardarFicha(tipo) {
     }
   }
 
-  // PHP a donde enviará los datos
-  const phpFile = tipo === 'psico' ? 'php/guardar_psico.php' : 'php/guardar_derivacion.php';
+  
+  const url = tipo === 'psico'
+    ? 'https://jeryroldan.github.io/colegio-Asis/php/guardar_psico.php'
+    : 'https://jeryroldan.github.io/colegio-Asis/php/guardar_derivacion.php';
 
-  fetch(phpFile, {
+  fetch(url, {
     method: 'POST',
     body: formData
   })
